@@ -10,10 +10,6 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
-        backend:
-          serviceName: microbot-service-1
-          servicePort: 80
       - path: /microbot1
         backend:
           serviceName: microbot-service-1
