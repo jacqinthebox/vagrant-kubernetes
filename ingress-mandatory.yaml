@@ -26,8 +26,8 @@ metadata:
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
-  data:
-    1433: "default/mssql-service:1433" 
+data:
+  1433: "default/mssql-service:1433" 
 ---
 kind: ConfigMap
 apiVersion: v1
