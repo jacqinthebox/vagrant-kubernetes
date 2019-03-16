@@ -24,16 +24,16 @@ networking:
   podSubnet: 10.244.0.0/16
 apiServer:
   CertSANs:
-  - "192.168.2.50"
-  - "machine01"
+  - "$2"
+  - "$3"
 etcd:
   local:
     serverCertSANs:
-      - "machine01"
-      - "192.168.2.50"
+      - "$2"
+      - "$3"
     peerCertSANs:
-      - "192.168.2.50"
-      - "machine01"
+      - "$2"
+      - "$3"
 EOF
 
 echo "[prepare] Turning off swap"
@@ -91,14 +91,10 @@ until $ROLLOUT_STATUS_CMD || [ $ATTEMPTS -eq 60 ]; do
 done
 
 
-echo "[postdeployment] Install Ingress"
-
-helm install stable/nginx-ingress --name vagrant --namespace kube-system --set controller.hostNetwork=true --set rbac.create=true --set controller.kind=Deployment --set controller.extraArgs.v=2 --set controller.extraArgs.tcp-services-configmap=default/sql-services
-
-echo "[postdeployment] Exposing port 1433"
-kubectl -n kube-system delete deployment vagrant-nginx-ingress-controller  
-kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/arm-templates-and-configs/optimize-kube/kubernetes-cluster/vagrant-ingress-deployment.yaml
-kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/arm-templates-and-configs/optimize-kube/kubernetes-cluster/sql-server-configmap.yaml
+echo "[postdeployment] Install a customized ingress and immediately enable sql port 1433"
+kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/ingress-mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/baremetal/service-nodeport.yaml
+kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/sql-server-configmap.yaml
 
 echo "[postdeployment] Set the Kubernetes Dashboard to NodePort"
 kubectl -n kube-system get service/kubernetes-dashboard -o yaml | sed "s/type: ClusterIP/type: NodePort/" | kubectl replace -f -
