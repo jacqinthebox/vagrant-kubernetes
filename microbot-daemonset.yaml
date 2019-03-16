@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: microbot1
-        image: jacqueline/microbot:model-1.2
+        image: jacqueline/microbot:latest
         ports:
         - containerPort: 80
 ---
@@ -36,6 +36,6 @@ spec:
     spec:
       containers:
       - name: microbot1
-        image: jacqueline/microbot:model-2.2
+        image: jacqueline/microbot:latest
         ports:
         - containerPort: 80
