@@ -14,7 +14,7 @@ SAN1="microbot"
 SAN2="microbot.moonstreet.local"
 
 echo "copy install script"
-wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/vagrant-kubernetes-install.sh && chmod u=rwx vagrant-kubernetes-install.sh && chown vagrant.vagrant vagrant-kubernetes-install.sh
+wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/kubernetes-vagrant-install.sh && chmod u=rwx kubernetes-vagrant-install.sh && chown vagrant.vagrant kubernetes-vagrant-install.sh
 
 if [ ! -f /tmp/50-vagrant.yaml ]; then
   echo "adding gateway"
@@ -34,9 +34,6 @@ echo "configuring SSH to allow passwords"
 sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
 ./vagrant-kubernetes-install.sh $CLUSTER $SAN1 $SAN2 
-
-echo "installing Microbot example"
-kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/microbot.yaml
 
 SCRIPT
 
