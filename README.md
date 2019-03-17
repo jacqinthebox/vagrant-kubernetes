@@ -60,7 +60,7 @@ kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernet
 I really wanted the cluster to have a custom clustername, else they are all named `kubernetes` :)
 This can only be done with a configfile for kubeadm.
 
-This is why [script](https://github.com/jacqinthebox/vagrant-kubernetes/blob/master/kubernetes-vagrant-install.sh) takes in 3 arguments: clustername, san1 and san2.
+This is why the [script](https://github.com/jacqinthebox/vagrant-kubernetes/blob/master/kubernetes-vagrant-install.sh) takes in 3 arguments: clustername, san1 and san2.
 
 With these arguments, a configfile is created for the kubeadm init:
 
@@ -84,7 +84,7 @@ etcd:
       - "$3"
 ```
 
-Just have a further look in the script to see how I constructed the cluster.  
+Just have a further look in the [script](https://github.com/jacqinthebox/vagrant-kubernetes/blob/master/kubernetes-vagrant-install.sh) to see how I constructed the cluster. Of course I am open for suggestions.  
 
 ## Disclaimer
 Do not use this in production. Vagrant boxes are meant for developing and testing.
