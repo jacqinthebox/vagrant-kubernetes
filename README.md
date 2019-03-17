@@ -1,6 +1,6 @@
 # Bootstrap a single node Kubernetes cluster with Kubeadm and Vagrant
 
-The purpose of this box is to quickly install a K8s cluster, roll your own microservices on top of it, break it down and see how it works.
+The purpose of this box is to quickly install a K8s cluster, roll your own microservices on top of it, break it down and see how it works. Inspired by this article: https://medium.com/@lizrice/kubernetes-in-vagrant-with-kubeadm-21979ded6c63
 
 What is installed:  
 * Ubuntu 18.04.02 LTS
