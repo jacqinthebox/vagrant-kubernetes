@@ -32,7 +32,7 @@ Then fetch the Vagrantfile:
 wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/Vagrantfile
 ```
 
-**Edit the Vagrantfile and adjust the variables on top to match your IP config and cluster- and SAN names.
+**Edit the Vagrantfile and adjust the variables on top to match your IP config and cluster- and SAN names**
 
 Then bootstrap the cluster like so:
 
