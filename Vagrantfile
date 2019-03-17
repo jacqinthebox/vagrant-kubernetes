@@ -35,6 +35,9 @@ sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/ss
 
 ./vagrant-kubernetes-install.sh $CLUSTER $SAN1 $SAN2 
 
+echo "installing Microbot example"
+kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/microbot.yaml
+
 SCRIPT
 
 
