@@ -2,7 +2,7 @@
 
 ## Instructions
 
-Install [https://www.vagrantup.com/](Vagrant) and [Virtualbox](https://www.virtualbox.org/).
+Install [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/).
 
 ```shell
 mkdir -p ~\vagrant\single-master
@@ -28,6 +28,10 @@ Copy the token and head over to the Dashboad url. Paste the token into the logon
 ```
 kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/microbot.yaml
 ```
+
+## How does this work?
+
+Just have a look in the kubernetes-vagrant-install.sh script :)
 
 ## Resources
 
