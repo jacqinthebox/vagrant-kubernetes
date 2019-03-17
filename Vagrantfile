@@ -33,7 +33,7 @@ fi
 echo "configuring SSH to allow passwords"
 sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
-./vagrant-kubernetes-install.sh $CLUSTER $SAN1 $SAN2 
+./kubernetes-vagrant-install.sh $CLUSTER $SAN1 $SAN2
 
 SCRIPT
 
