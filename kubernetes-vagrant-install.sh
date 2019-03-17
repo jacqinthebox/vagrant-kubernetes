@@ -34,10 +34,12 @@ etcd:
     peerCertSANs:
       - "$2"
       - "$3"
-controllerManagerExtraArgs:
-  address: 0.0.0.0
-schedulerExtraArgs:
-  address: 0.0.0.0
+controllerManager
+  extraArgs:
+    "address": "0.0.0.0"
+scheduler
+  extraArgs:
+    "address": "0.0.0.0"
 EOF
 
 echo "[prepare] Turning off swap"
