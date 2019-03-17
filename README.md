@@ -1,6 +1,7 @@
 # Bootstrap a single node Kubernetes cluster with Kubeadm and Vagrant
 
 The purpose of this box is to quickly install a K8s cluster, roll your own microservices on top of it, break it down and see how it works. Inspired by this article: https://medium.com/@lizrice/kubernetes-in-vagrant-with-kubeadm-21979ded6c63
+I use this instead of Minikube or Docker for Desktop because this approach better reflects a production setup and it gives you the option to add worker nodes as well. 
 
 What is installed:  
 * Ubuntu 18.04.02 LTS
