@@ -21,14 +21,27 @@ Customizations:
 
 Install [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/).
 
+Create some folders, e.g.
 ```sh
 mkdir -p ~\vagrant\single-master
 cd ~\vagrant\single-master
+```
+
+Then fetch the Vagrantfile:
+```sh
 wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/Vagrantfile
+```
+
+**Edit the Vagrantfile and adjust the variables on top to match your IP config and cluster- and SAN names.
+
+Then bootstrap the cluster like so:
+
+```sh
 vagrant up node01
 ```
 
 Sit back and wait for it to finish. 
+
 
 ## Log in to the Dashboard
 
@@ -44,8 +57,34 @@ kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernet
 
 ## How does this work?
 
-Just have a look in the [script](https://github.com/jacqinthebox/vagrant-kubernetes/blob/master/kubernetes-vagrant-install.sh) :)
+I really wanted the cluster to have a custom clustername, else they are all named `kubernetes` :)
+This can only be done with a configfile for kubeadm.
 
+This is why [script](https://github.com/jacqinthebox/vagrant-kubernetes/blob/master/kubernetes-vagrant-install.sh) takes in 3 arguments: clustername, san1 and san2.
+
+With these arguments, a configfile is created for the kubeadm init:
+
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+clusterName: $1
+networking:
+  podSubnet: 10.244.0.0/16
+apiServer:
+  CertSANs:
+  - "$2"
+  - "$3"
+etcd:
+  local:
+    serverCertSANs:
+      - "$2"
+      - "$3"
+    peerCertSANs:
+      - "$2"
+      - "$3"
+```
+
+Just have a further look in the script to see how I constructed the cluster.  
 
 ## Disclaimer
 Do not use this in production. Vagrant boxes are meant for developing and testing.
