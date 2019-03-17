@@ -29,10 +29,12 @@ netplan --debug generate
 netplan --debug apply
 
 fi
-
 echo "configuring SSH to allow passwords"
 sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+echo "restarting ssh service"
+service ssh restart
 
+echo "install kubernetes"
 ./kubernetes-vagrant-install.sh $CLUSTER $SAN1 $SAN2
 
 SCRIPT
