@@ -1,21 +1,34 @@
 # Bootstrap a single node Kubernetes cluster with Kubeadm and Vagrant
 
+The purpose of this box is to quickly install a K8s cluster, roll your own microservices on top of it, break it down and see how it works.
+
+What is installed:  
+* Ubuntu 18.04.02 LTS
+* Docker
+* Kubeadm
+* Single node Kubernetes cluster
+* Flannel
+* Nginx Ingress
+* Kubernetes Dashboard
+* Helm
+
+Customizations:  
+* The Nginx ingress controller will also listen to 1433 (mssql). See the configmap.
+* it is set to use hostnetwork is set to true to have it work on a single node bare metal cluster
+* the Dashboard is set to use NodePort to be able to browse to it via its TCP port instead of using `kubectl proxy`. 
+
 ## Instructions
 
 Install [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/).
 
-```shell
+```sh
 mkdir -p ~\vagrant\single-master
 cd ~\vagrant\single-master
 wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/Vagrantfile
 vagrant up node01
 ```
 
-Sit back and wait for it to finish. Once done, you will have a running Kubernetes cluster with the Kubernetes Dashboard, Nginx Ingress and Helm pre-installed.
-
-The Nginx Ingress controller is slightly customized:
-* it will also listen to 1433 (mssql). See the configmap.
-* use hostnetwork is set to true to have it work on a single node bare metal cluster
+Sit back and wait for it to finish. 
 
 ## Log in to the Dashboard
 
@@ -31,7 +44,11 @@ kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernet
 
 ## How does this work?
 
-Just have a look in the kubernetes-vagrant-install.sh script :)
+Just have a look in the [script](https://github.com/jacqinthebox/vagrant-kubernetes/blob/master/kubernetes-vagrant-install.sh) :)
+
+
+## Disclaimer
+Do not use this in production. Vagrant boxes are meant for developing and testing.
 
 ## Resources
 
