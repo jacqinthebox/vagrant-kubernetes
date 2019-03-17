@@ -1,5 +1,35 @@
-# vagrant-kubernetes
-On Kubernetes clusters with Vagrant
+# Bootstrap a single node Kubernetes cluster with Kubeadm and Vagrant
+
+## Instructions
+
+Install [https://www.vagrantup.com/](Vagrant) and [Virtualbox]().
+
+```shell
+mkdir -p ~\vagrant\single-master
+cd ~\vagrant\single-master
+wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/Vagrantfile
+vagrant up node01
+```
+
+Sit back and wait for it to finish. Once done, you will have a running Kubernetes cluster with the Kubernetes Dashboard, Nginx Ingress and Helm pre-installed.
+
+The Nginx Ingress controller is slightly customized:
+* it will also listen to 1433 (mssql). See the configmap.
+* use hostnetwork is set to true to have it work on a single node bare metal cluster
+
+## Log in to the Dashboard
+
+Note the Dashboard url and the token in the script output. 
+Copy the token and head over to the Dashboad url. Paste the token into the logon form.
+
+
+## Optional: deploy example application
+
+```
+kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/microbot.yaml
+```
+
+## Resources
 
 [https://github.com/kubernetes/kubernetes/issues/33618](https://github.com/kubernetes/kubernetes/issues/33618)  
 [https://github.com/kubernetes/kubeadm/issues/1330](https://github.com/kubernetes/kubeadm/issues/1330)  
