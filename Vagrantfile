@@ -2,20 +2,27 @@
 # vi: set ft=ruby :
 
 BRIDGE_IF="wlp4s0"
-IP_ADDR_NODE01="192.168.2.52"
-IP_ADDR_NODE02="192.168.2.53"
+IP_ADDR_NODE01="192.168.2.51"
+IP_ADDR_NODE02="192.168.2.52"
 
 $script = <<-SCRIPT
+
+GATEWAY="192.168.2.254"
+DNS="192.168.2.254"
+CLUSTER="microbot-k8s"
+SAN1="microbot"
+SAN2="microbot.moonstreet.local"
+
 echo "copy install script"
-wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/vagrant-kubernetes-install.sh && chmod u=rwx vagrant-kubernetes-install.sh
+wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/vagrant-kubernetes-install.sh && chmod u=rwx vagrant-kubernetes-install.sh && chown vagrant.vagrant vagrant-kubernetes-install.sh
 
 if [ ! -f /tmp/50-vagrant.yaml ]; then
   echo "adding gateway"
   cp /etc/netplan/50-vagrant.yaml /tmp/
 cat << EOF >> /etc/netplan/50-vagrant.yaml
-      gateway4: 192.168.2.254
+      gateway4: $GATEWAY
       nameservers:
-        addresses: [192.168.2.254,9.9.9.9]
+        addresses: [$DNS,9.9.9.9]
 EOF
 
 netplan --debug generate
@@ -25,6 +32,9 @@ fi
 
 echo "configuring SSH to allow passwords"
 sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+
+./vagrant-kubernetes-install.sh $CLUSTER $SAN1 $SAN2 
+
 SCRIPT
 
 
