@@ -34,10 +34,10 @@ etcd:
     peerCertSANs:
       - "$2"
       - "$3"
-controllerManager
+controllerManager:
   extraArgs:
     "address": "0.0.0.0"
-scheduler
+scheduler:
   extraArgs:
     "address": "0.0.0.0"
 EOF
