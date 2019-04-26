@@ -1,0 +1,27 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: persistent-volume-db
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage-db
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/host_mnt/c/kubernetes"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: persistent-volume-claim-db
+spec:
+  storageClassName: local-storage-db
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
