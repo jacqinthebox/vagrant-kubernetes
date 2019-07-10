@@ -36,8 +36,11 @@ wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/Va
 
 **Then edit the Vagrantfile and adjust the variables on top to match your IP config and cluster- and SAN names**
 
+For example, when on Linux:  
 To find your Gateway type `netstat -rn`   
 To find your DNS type `nmcli dev show | grep DNS`  
+
+In Windows `ipconfig /all` will do the trick.
 
 Then bootstrap the cluster like so:
 
