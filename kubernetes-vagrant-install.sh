@@ -2,6 +2,8 @@
 
 if [ ! -f /tmp/installed ]; then
 
+echo "All (*) args are ” $"
+
 if [ -z "$1" ]
 then
 	echo "You forgot the clustername. You should run the script with a variable like so: sudo ./install.sh clustername"
