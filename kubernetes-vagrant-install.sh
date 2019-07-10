@@ -99,7 +99,7 @@ done
 
 echo "[postdeployment] Install a customized ingress and immediately enable sql port 1433"
 kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/ingress-mandatory.yaml
-kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/service-nodeport.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/service-nodeport.yaml
 kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/sql-server-configmap.yaml
 
 echo "[postdeployment] Set the Kubernetes Dashboard to NodePort"
