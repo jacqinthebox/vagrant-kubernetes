@@ -2,7 +2,7 @@
 
 if [ ! -f /tmp/installed ]; then
 
-echo "All (*) args are ” $"
+echo "All (*) args are " $*
 
 if [ -z "$1" ]
 then
