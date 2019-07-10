@@ -25,8 +25,8 @@ Install [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtu
 
 Create some folders, e.g.
 ```sh
-mkdir -p ~\vagrant\single-master
-cd ~\vagrant\single-master
+mkdir -p ~/vagrant/single-master
+cd ~/vagrant/single-master
 ```
 
 Then fetch the Vagrantfile:
