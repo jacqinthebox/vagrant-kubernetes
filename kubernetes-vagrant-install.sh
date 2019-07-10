@@ -17,23 +17,29 @@ if [ -f kubeadm-config.yaml  ]; then
 fi
 
 cat > kubeadm-config.yaml <<EOF
-apiVersion: kubeadm.k8s.io/v1beta1
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: $2
+  bindPort: 6443
+---
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 clusterName: $1
 networking:
   podSubnet: 10.244.0.0/16
 apiServer:
   CertSANs:
-  - "$2"
   - "$3"
+  - "$4"
 etcd:
   local:
     serverCertSANs:
-      - "$2"
       - "$3"
+      - "$4"
     peerCertSANs:
-      - "$2"
       - "$3"
+      - "$4"
 controllerManager:
   extraArgs:
     "address": "0.0.0.0"
