@@ -65,6 +65,15 @@ For example
 scp vagrant@192.168.0.184:/home/vagrant/.kube/config .
 ```
 
+And then add it to your current config like so (assuming your $KUBECONFIG is empty):
+
+```
+export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config:$HOME/vagrant/single-master/config
+```
+
+https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable
+
+
 ## Optional: deploy example application
 
 ```
