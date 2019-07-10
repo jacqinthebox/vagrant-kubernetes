@@ -34,9 +34,12 @@ echo "configuring SSH to allow passwords"
 sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 echo "restarting ssh service"
 service ssh restart
+echo "sshd has been restarted"
 
-echo "install kubernetes"
+echo "watch out!"
+echo "installing kubernetes"
 echo "running command ./kubernetes-vagrant-install.sh ${CLUSTER} ${IP_ADDR_NODE01} ${SAN1} ${SAN2}"
+./kubernetes-vagrant-install.sh $CLUSTER $IP_ADDR_NODE01 $SAN1 $SAN2
 
 SCRIPT
 
