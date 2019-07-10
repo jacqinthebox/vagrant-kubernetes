@@ -35,7 +35,7 @@ echo "restarting ssh service"
 service ssh restart
 
 echo "install kubernetes"
-./kubernetes-vagrant-install.sh $CLUSTER $SAN1 $SAN2
+./kubernetes-vagrant-install.sh $CLUSTER $IP_ADDR_NODE01 $SAN1 $SAN2
 
 SCRIPT
 
