@@ -57,6 +57,14 @@ Note the Dashboard url and the token in the script output.
 Copy the token and head over to the Dashboad url. Paste the token into the logon form.
 
 
+## Copy the Kube config
+
+For example
+
+```sh
+scp vagrant@192.168.0.184:/home/vagrant/.kube/config .
+```
+
 ## Optional: deploy example application
 
 ```
