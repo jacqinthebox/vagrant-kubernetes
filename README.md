@@ -34,9 +34,13 @@ Then fetch the Vagrantfile:
 wget https://raw.githubusercontent.com/jacqinthebox/vagrant-kubernetes/master/Vagrantfile
 ```
 
-**Then edit the Vagrantfile and adjust the variables on top to match your IP config and cluster- and SAN names**
+Then edit the Vagrantfile.  
+Adjust the variables on top to match your IP config and cluster- and SAN names**
 
-For example, when on Linux:  
+![variables](https://i.imgur.com/bx7VoJP.png)
+
+For example, when on Linux:
+To find your bridge interface, type `net add`
 To find your Gateway type `netstat -rn`   
 To find your DNS type `nmcli dev show | grep DNS`  
 
