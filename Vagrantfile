@@ -8,7 +8,7 @@ BRIDGE_IF="enp3s0"
 # This will be the fixed IP address of the virtual machine
 IP_ADDR_NODE01="192.168.2.51"
 # Optional: fixed IP for second virtual machine
-IP_ADDR_NODE01="192.168.2.51"
+IP_ADDR_NODE02="192.168.2.51"
 
 #Also adjust the 6 variables in the script section:
 $script = <<-SCRIPT
