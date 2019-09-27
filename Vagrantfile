@@ -1,10 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-BRIDGE_IF="wlp4s0"
-IP_ADDR_NODE01="192.168.2.51"
-IP_ADDR_NODE02="192.168.2.52"
+# Edit the variables between lines 7-18:
 
+# Find your bridge interface name, e.g. with ip add or ifconfig or ipconfig
+BRIDGE_IF="enp3s0"
+# This will be the fixed IP address of the virtual machine
+IP_ADDR_NODE01="192.168.2.51"
+# Optional: fixed IP for second virtual machine
+IP_ADDR_NODE01="192.168.2.51"
+
+#Also adjust the 6 variables in the script section:
 $script = <<-SCRIPT
 
 IP_ADDR_NODE01="192.168.2.51"
@@ -54,6 +60,7 @@ Vagrant.configure("2") do |config|
     end
   end
   
+  # optional 2nd node
   config.vm.define "node02" do |node02_config|
     node02_config.vm.box = "ubuntu/bionic64"
     node02_config.vm.hostname = "node02"
