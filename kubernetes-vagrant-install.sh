@@ -92,7 +92,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/
 
 echo "[postdeployment] Install Helm, wait for the Tiller pod to get ready"
 
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+#curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+wget https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz
+tar -xvf helm-v2.14.3-linux-amd64.tar.gz
+cd linux-amd64
+mv helm /usr/local/bin && mv tiller /usr/local/bin
 kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts
 helm init --service-account default
 
