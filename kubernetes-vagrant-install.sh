@@ -74,7 +74,7 @@ kubeadm init --config=kubeadm-config.yaml #--pod-network-cidr=10.244.0.0/16
 export KUBECONFIG=/etc/kubernetes/admin.conf
 
 echo "[postdeployment] Installing Flannel"
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 touch /tmp/installed
 
 echo "[postdeployment] Arranging access to the cluster for $(logname)\n"
