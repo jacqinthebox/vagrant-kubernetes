@@ -30,7 +30,6 @@ kind: ClusterConfiguration
 clusterName: $1
 networking:
   podSubnet: 10.244.0.0/16
-kubernetesVersion: "v1.15.0"
 apiServer:
   CertSANs:
   - "$3"
@@ -68,7 +67,7 @@ cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 apt-get update
-apt-get install -y kubelet kubeadm kubectl
+apt-get install -y kubelet  kubeadm kubectl
 
 echo "[kube-install] Running kubeadm"
 kubeadm init --config=kubeadm-config.yaml #--pod-network-cidr=10.244.0.0/16 
