@@ -30,6 +30,7 @@ kind: ClusterConfiguration
 clusterName: $1
 networking:
   podSubnet: 10.244.0.0/16
+kubernetesVersion: "v1.14.0"
 apiServer:
   CertSANs:
   - "$3"
