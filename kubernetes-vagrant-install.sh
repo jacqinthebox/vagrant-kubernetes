@@ -28,6 +28,7 @@ localAPIEndpoint:
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 clusterName: $1
+kubernetesVersion: "v1.15.4"
 networking:
   podSubnet: 10.244.0.0/16
 apiServer:
