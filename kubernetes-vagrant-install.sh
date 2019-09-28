@@ -68,7 +68,9 @@ cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 apt-get update
-apt-get install -y kubelet  kubeadm kubectl
+#apt-get install -y kubelet  kubeadm kubectl
+echo "[kube-install] Installing kubeadm, kubectl and kubelet version 1.15.4"
+apt-get install -y kubectl=1.15.4-00 kubeadm=1.15.4-00 kubelet=1.15.4-00
 
 echo "[kube-install] Running kubeadm"
 kubeadm init --config=kubeadm-config.yaml #--pod-network-cidr=10.244.0.0/16 
