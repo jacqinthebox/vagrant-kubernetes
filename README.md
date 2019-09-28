@@ -40,8 +40,9 @@ Adjust the variables on top to match your IP config and cluster- and SAN names**
 ![variables](https://i.imgur.com/bx7VoJP.png)
 
 For example, when on Linux:
+To find a free IP address in your subnet, type e.g. `nmap -sP 192.168.1.0/24`
 To find your bridge interface, type `net add`
-To find your Gateway type `netstat -rn`   
+To find your Gateway type `netstat -rn` or `ip r`   
 To find your DNS type `nmcli dev show | grep DNS`  
 
 In Windows `ipconfig /all` will do the trick.
