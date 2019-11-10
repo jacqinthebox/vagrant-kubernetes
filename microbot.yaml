@@ -23,7 +23,7 @@ spec:
     name: microbot-app-2
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: microbot-app-1
   labels:
@@ -44,7 +44,7 @@ spec:
         - containerPort: 80
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: microbot-app-2
   labels:
