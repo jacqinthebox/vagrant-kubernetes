@@ -4,9 +4,9 @@ metadata:
   name: microbot-service-1
 spec:
   ports:
-  - port: 80
-    protocol: TCP
-    name: http
+    - port: 80
+      protocol: TCP
+      name: http
   selector:
     name: microbot-app-1
 ---
@@ -38,10 +38,10 @@ spec:
         name: microbot-app-1
     spec:
       containers:
-      - name: microbot1
-        image: jacqueline/microbot:1.0.0
-        ports:
-        - containerPort: 80
+        - name: microbot1
+          image: jacqueline/microbot:1.0.0
+          ports:
+            - containerPort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
