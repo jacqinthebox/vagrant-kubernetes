@@ -1,0 +1,52 @@
+    1  kubeadm join 192.168.2.201:6443 --token ut2dtx.ct8cl0p6hppe7ibs --discovery-token-ca-cert-hash sha256:0e64eb0b9c5090291931238b310bea46060969bcb3f93afb72870c083a628c56
+    2  sudo kubeadm join 192.168.2.201:6443 --token ut2dtx.ct8cl0p6hppe7ibs --discovery-token-ca-cert-hash sha256:0e64eb0b9c5090291931238b310bea46060969bcb3f93afb72870c083a628c56
+    3  exit
+    4  curl localhost
+    5  exit
+    6  curl http://192.168.2.202:30174
+    7  curl http://192.168.2.202
+    8  curl http://192.168.2.202:30101
+    9  curl https://192.168.2.202:30101
+   10  curl https://192.168.2.202:30766
+   11  curl https://192.168.2.202:30776
+   12  curl -k -v https://192.168.2.202:30776
+   13  curl http://192.168.2.202:30174
+   14  exit
+   15  cd /etc/systemd/system/
+   16  ls
+   17  cd kubelet.service.d/
+   18  ls
+   19  vim 10-kubeadm.conf 
+   20  sudo vim 10-kubeadm.conf 
+   21  sudo systemctl daemon-reload
+   22  sudo systemctl restart kubelet
+   23  exit
+   24  clear
+   25  ps -ax | grep kubelet
+   26  sudo systemctl stop kubelet
+   27  ps -ax | grep kubelet
+   28  cd /etc/systemd
+   29  cd system/
+   30  ls
+   31  cd kubelet.service.d/
+   32  l
+   33  cat 10-kubeadm.conf 
+   34  sudo cat 10-kubeadm.conf 
+   35  cd 
+   36  ps -ax | grep kubelet
+   37  cd /etc/systemd
+   38  cd system/
+   39  cd kubelet.service.d/
+   40  cd ..
+   41  exit
+   42  cd /etc/systemd/system/
+   43  ls
+   44  cat kubelet.service.d/
+   45  cd kubelet.service.d/
+   46  ls
+   47  cat 10-kubeadm.conf 
+   48  sudo su
+   49  exit
+   50  history
+   51  exit
+   52  history > /vagrant/kube02-history.txt 

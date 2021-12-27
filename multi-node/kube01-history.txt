@@ -1,0 +1,302 @@
+    1  exit
+    2  vim /vagrant/install.sh 
+    3  cd /vagrant/
+    4  chmod +x install.sh 
+    5  ./install.sh 
+    6  kubectl
+    7  kubectl get pods
+    8  vim install.sh 
+    9  kubeadm init --apiserver-advertise-address 192.168.2.201 --apiserver-cert-extra-sans controlplane --pod-network-cidr 10.244.0.0/16
+   10  sudo kubeadm init --apiserver-advertise-address 192.168.2.201 --apiserver-cert-extra-sans controlplane --pod-network-cidr 10.244.0.0/16
+   11  exit
+   12  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   13  kubectl get pods
+   14  kubectl get nodes -o wide
+   15  cp ~/.kube/config /vagrant/
+   16  exit
+   17  cd /etc/kubernetes/
+   18  ls
+   19  cd pki
+   20  ls
+   21  ssl
+   22  openssl
+   23  openssl -x509 
+   24  openssl x509 
+   25  openssl x509 -in ca.crt 
+   26  openssl x509 -in ca.crt -out
+   27  openssl x509 -in ca.crt -out test
+   28  openssl x509 -in ca.crt -out ~/test
+   29  cat ~/test 
+   30  openssl --help
+   31  man openssl
+   32  openssl x509 -in ca.crt -text -noout
+   33  kubectl drain kube03
+   34  kubectl drain kube03 --ignore-daemonsets
+   35  kubectl uncordon kube03
+   36  k get nodes 0o wide
+   37  k get nodes -o wide
+   38  kubectl get nodes -o wide
+   39  exit
+   40  kubectl get nodes -o wide
+   41  ls
+   42  kubectl get pods
+   43  vim kube-scheduler.yaml 
+   44  kubectl delete pod kube-scheduler-custom
+   45  vim kube-scheduler.yaml 
+   46  kubectl delete pod kube-scheduler-custom
+   47  sudo cp /etc/kubernetes/manifests/kube-scheduler.yaml kube-scheduler.yaml 
+   48  vim kube-scheduler.yaml 
+   49  kubectl apply -f kube-scheduler.yaml 
+   50  kubectl get pods
+   51  ls
+   52  kubectl delete pod examplepod
+   53  kubectl get pods
+   54  cd /etc/kubernetes/manifests/
+   55  ls
+   56  vim pod.yaml 
+   57  kubectl get pods
+   58  d 
+   59  cd 
+   60  vim kube-scheduler.yaml 
+   61  kubectl delete pod kube-scheduler
+   62  kubectl apply -f kube-scheduler.yaml 
+   63  kubectl get pods
+   64  kubectl get events
+   65  kubectl delete pod kube-scheduler1
+   66  vim kube-scheduler.yaml 
+   67  kubectl apply -f kube-scheduler.yaml 
+   68  kubectl get events
+   69  vim kube-scheduler.yaml 
+   70  kubectl delete pod kube-scheduler1
+   71  kubectl apply -f kube-scheduler.yaml 
+   72  kubectl get pods
+   73  kubectl get events
+   74  kubectl get pods
+   75  kubectl get events
+   76  cd /etc/kubernetes/manifests/
+   77  ls
+   78  mv pod.yaml ~/
+   79  sudo mv pod.yaml ~/
+   80  cd 
+   81  vim pod.yaml 
+   82  kubectl applyu -f pod.yaml 
+   83  kubectl apply -f pod.yaml 
+   84  kubectl get pods
+   85  kubectl get evemts
+   86  kubectl get events
+   87  kubectl get pods
+   88  kubectl describe examplepod
+   89  kubectl describe pod examplepod
+   90  kubectl get events
+   91  kubectl get pods
+   92  kubectl delete pod kube-scheduler1
+   93  kubectl apply -f kube-scheduler.yaml 
+   94  kubectl get events
+   95  kubectl get pods
+   96  kubectl get events
+   97  vim pod.yaml 
+   98  kubectl get pods
+   99  kubectl delete pod examplepod
+  100  kubectl apply -f  pod.yaml 
+  101  kubectl get pods
+  102  kubectl logs -f examplepod
+  103  kubectl logs examplepod
+  104  kubectl describe examplepod
+  105  kubectl describe pod examplepod
+  106  kubectl 
+  107  kubectl describe examplepod
+  108  kubectl get pods
+  109  kubectl logs kube-scheduler1
+  110  kubectl logs pod kube-scheduler1
+  111  kubectl logs pod/kube-scheduler1
+  112  kubectl get pods
+  113  kubectl logs kube-scheduler1
+  114  kubectl logs kube-scheduler-kube01
+  115  kubectl logs kube-scheduler1
+  116  kubectl delete pod kube-scheduler1
+  117  sudo mv kube-scheduler.yaml /etc/kubernetes/manifests/kube-scheduler1.yaml 
+  118  kubectl get pods
+  119  kubectl logs kube-scheduler1-kube01
+  120  sudo vim /etc/kubernetes/manifests/kube-scheduler1.yaml 
+  121  kubectl get pods
+  122  sudo vim /etc/kubernetes/manifests/kube-scheduler1.yaml 
+  123  kubectl get pods
+  124  kubectl describe pod examplepod
+  125  exit
+  126  sudo vim /etc/kubernetes/manifests/kube-scheduler1.yaml 
+  127  kubectl get pods
+  128  kubectl describe pod examplepod
+  129  kubectl get pods
+  130  sudo apt install net-tools
+  131  vim pod.yaml 
+  132  kubectl describe pod examplepod
+  133  sudo vim /etc/kubernetes/manifests/kube-scheduler1.yaml 
+  134  exit
+  135  cd /etc/kubernetes/
+  136  cd manifests/
+  137  kubectl run consul --image consul --dry-run=client -o yaml > ~/consul.yaml
+  138  vim ~/consul.yaml 
+  139  kubectl apply -f ~/consul.yaml 
+  140  kubectl create namespace tools
+  141  mv ~/consul.yaml consul.yaml
+  142  sudo mv ~/consul.yaml consul.yaml
+  143  kubectl get pods -A
+  144  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/baremetal/deploy.yaml
+  145  kubectl get pods
+  146  kubectl get pods -a
+  147  kubectl get pods -A
+  148  kubectl get svc -A
+  149  curl localhost:80
+  150  netstat -tulpan
+  151  netstat -tulpan | grep 443
+  152  sudo netstat -tulpan | grep 443
+  153  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+  154  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/baremetal/deploy.yaml
+  155  kubectl get svc -A
+  156  curl localhost:443
+  157  curl localhost:31627
+  158  kubectl get pods
+  159  kubectl get pods -A
+  160  kubectl get svc -A
+  161  sudo netstat -tulpan | grep 80
+  162  kubectl get pods -A
+  163  kubectl get pods -A -o wide
+  164  kubectl config set-context --namespace ingress-nginx --current
+  165  kubectl get deployments
+  166  kubectl edit deployment ingress-nginx-controller
+  167  kubectl get pods -A -o wide
+  168  curl localhost:443
+  169  curl https://localhost
+  170  kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/baremetal/deploy.yaml
+  171  cd ..
+  172  kubectl apply -f https://raw.githubusercontent.com/jacqinthebox/kubernetes-scripts/master/ingress-mandatory.yaml
+  173  kubectl get pods -A -o wide
+  174  curl localhost:443
+  175  curl localhost:80
+  176  kubectl delete -f https://raw.githubusercontent.com/jacqinthebox/kubernetes-scripts/master/ingress-mandatory.yaml
+  177  kubectl get pods -A -o wide
+  178  kubectl create ns ingress-space
+  179  kubectkl create cm nginx-configuration -n ingress-space
+  180  kubectl create cm nginx-configuration -n ingress-space
+  181  exit
+  182  kubectl config set-context --namespace web --current
+  183  kubectl get pods
+  184  kubectl exec -ti simple-webapp-d6d6c8d6d-8wwfd -- bash
+  185  exit
+  186  ls
+  187  cd /etc/kubernetes/manifests/
+  188  ls
+  189  vim kube-scheduler1.yaml 
+  190  kubectl get pods
+  191  exit
+  192  cd /etc/kubernetes/manifests/
+  193  ls
+  194  sudo mv kube-scheduler1.yaml ~
+  195  ls
+  196  cd 
+  197  ls
+  198  vim kube-scheduler1.yaml 
+  199  k get pods
+  200  kubectl get pods
+  201  kubectl get pods -n kube-system
+  202  kubectl delete pod example3 -n kube-system
+  203  kubectl delete pod examplepod -n kube-system
+  204  kubectl delete pod examplepod3 -n kube-system
+  205  cd /etc/kubernetes/manifests/
+  206  ls
+  207  cd 
+  208  kubectl get pods
+  209  kubectl get pods -n kube-system
+  210  kubectl delete pod custom-scheduler
+  211  kubectl delete pod custom-scheduler -n kube-system
+  212  cd 
+  213  vim kube-scheduler1.yaml 
+  214  sudo cp kube-scheduler1.yaml /etc/kubernetes/manifests/
+  215  kubectl get pods -n kube-system
+  216  cd 
+  217  vim pod.yaml
+  218  vim pod.yaml 
+  219  kubectl apply -f pod.yaml 
+  220  kubectl get pods
+  221  kubectl config set-context --current --namespace default
+  222  kubectl get pods
+  223  kubectl get events
+  224  kubectl describe pod annotation-default-scheduler
+  225  kubectl delete pod annotation-default-scheduler
+  226  kubectl get pods -A
+  227  vim pod.yaml
+  228  kubectl apply -f pod.yaml 
+  229  kubectl get pods
+  230  kubectl get-version
+  231  kubectl version
+  232  kubectl 
+  233  kubectl cluster-info
+  234  kubectl cluster-info dump
+  235  kubectl get nodes
+  236  kubectl get pods
+  237  exit
+  238  vim kube-scheduler1.yaml 
+  239  kubectl get pods -A
+  240  kubectl delete pod my-scheduler-kube01
+  241  kubectl delete pod my-scheduler-kube01 -n kube-system
+  242  sudo cp kube-scheduler1.yaml /etc/kubernetes/manifests/
+  243  vim kube-scheduler1.yaml 
+  244  sudo cp kube-scheduler1.yaml /etc/kubernetes/manifests/
+  245  vim kube-scheduler1.yaml 
+  246  sudo cp kube-scheduler1.yaml /etc/kubernetes/manifests/
+  247  ls
+  248  vim pod.yaml 
+  249  kubectl apply -f pod.yaml 
+  250  k get pods
+  251  kubectl get pods
+  252  kubectl delete pod annotation-default-scheduler
+  253  kubectl apply -f pod.yaml 
+  254  kubectl get pods
+  255  vim pod.yaml 
+  256  kubectl delete pod annotation-default-scheduler
+  257  kubectl apply -f pod.yaml 
+  258  kubectl get pods
+  259  vim kube-scheduler1.yaml 
+  260  sudo cp kube-scheduler1.yaml /etc/kubernetes/manifests/
+  261  kubectl get pods
+  262  kubectl describe pod annotation-default-scheduler
+  263  vim kube-scheduler1.yaml 
+  264  exit
+  265  cd /etc/system/
+  266  cd /etc/systemd/
+  267  cd system/
+  268  l
+  269  ls -la
+  270  cd kubelet.service.d/
+  271  cat 10-kubeadm.conf 
+  272  sudo cat 10-kubeadm.conf 
+  273  cd /var/lib/kubelet/
+  274  sudo cd /var/lib/kubelet/
+  275  cd /var/lib/kubelet/
+  276  cd /var/lib/
+  277  sudo su
+  278  exit
+  279  source /usr/share/bash-completion/bash_completion
+  280  type _init_completion
+  281  echo 'source <(kubectl completion bash)' >>~/.bashrc
+  282  exit
+  283  k get pods
+  284  echo 'alias k=kubectl' >>~/.bashrc
+  285  echo 'complete -F __start_kubectl k' >>~/.bashrc
+  286  source ~/.bashrc 
+  287  k get pods
+  288  k run backend --image=nginx --command sh sleep 10
+  289  k edit pod backend 
+  290  k delete pod backend 
+  291  k delete pod backend --grace-period 0 --force
+  292  k run backend --image=nginx --command sh sleep 10 --env=DB_USER=sqladmin
+  293  k edit pod backend 
+  294  k create service nodeport --node-port 30080 
+  295  k create service nodeport backend-svc --node-port 30080 
+  296  k create service nodeport backend-svc --node-port 30080 --tcp 
+  297  k create service nodeport backend-svc --node-port 30080 --tcp --help
+  298  k create service --help
+  299  doom sync
+  300  exit
+  301  history
+  302  history > /vagrant/kube01-history.txt

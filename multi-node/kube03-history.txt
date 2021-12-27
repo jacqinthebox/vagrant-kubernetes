@@ -1,0 +1,22 @@
+    1  kubeadm join 192.168.2.201:6443 --token ut2dtx.ct8cl0p6hppe7ibs --discovery-token-ca-cert-hash sha256:0e64eb0b9c5090291931238b310bea46060969bcb3f93afb72870c083a628c56
+    2  sudo kubeadm join 192.168.2.201:6443 --token ut2dtx.ct8cl0p6hppe7ibs --discovery-token-ca-cert-hash sha256:0e64eb0b9c5090291931238b310bea46060969bcb3f93afb72870c083a628c56
+    3  exit
+    4  sudo vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+    5  sudo systemctl daemon-reload
+    6  sudo systemctl restart-kubelet
+    7  sudo restart-kubelet
+    8  sudo systemctl restart kubelet
+    9  exit
+   10  sudo vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+   11  sudo systemctl daemon-reload
+   12  sudo systemctl stop kubelet
+   13  sudo systemctl start kubelet
+   14  sudo vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+   15  sudo systemctl stop kubelet
+   16  sudo systemctl start kubelet
+   17  sudo systemctl daemon-reload
+   18  sudo systemctl stop kubelet
+   19  sudo systemctl start kubelet
+   20  sudo vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+   21  sudo cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf > /vagrant/10-kubeadm.conf 
+   22  history > /vagrant/kube03-history.txt 

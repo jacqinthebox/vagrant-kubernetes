@@ -1,0 +1,104 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Find your bridge interface name, e.g. with ip add or ifconfig or ipconfig
+BRIDGE_IF="enp0s20f0u2u1u2"
+# This will be the fixed IP address of the virtual machine
+#IP_ADDR_NODE01="192.168.2.200"
+IP_ADDR_NODE01="192.168.2.201"
+IP_ADDR_NODE02="192.168.2.202"
+IP_ADDR_NODE03="192.168.2.203"
+
+#sudo kubeadm init --apiserver-advertise-address 192.168.2.201 --apiserver-cert-extra-sans node01 --pod-network-cidr 10.244.0.0/16
+#kubeadm join 192.168.2.201:6443 --token 8tb0jk.xf53n8zzhkmjrwuo --discovery-token-ca-cert-hash sha256:670c4f7634ec7405cdfef8e12eaac9f71b12a9c562114be1c80652835e996085
+
+#Also adjust the 6 variables in the script section:
+$generic= <<-GENERIC
+# This will be the fixed IP address of the virtual machine
+GATEWAY="192.168.2.254"
+DNS="192.168.2.254"
+
+wget -q https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz
+
+if [ ! -f /tmp/50-vagrant.yaml ]; then
+  echo "adding gateway"
+  cp /etc/netplan/50-vagrant.yaml /tmp/
+cat << EOF >> /etc/netplan/50-vagrant.yaml
+      gateway4: $GATEWAY
+      nameservers:
+        addresses: [$DNS,9.9.9.9]
+EOF
+
+netplan --debug generate
+netplan --debug apply
+
+fi
+echo "configuring SSH to allow passwords"
+sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+echo "restarting ssh service"
+service ssh restart
+echo "sshd has been restarted"
+GENERIC
+
+$kubePrep = <<-KUBEPREP
+echo "[prepare] Turning off swap"
+swapoff -a
+cp /etc/fstab ~/fstab.old
+sed -i '/swapfile/d' /etc/fstab
+
+echo "[prepare] Installing Docker!"
+apt-get update && apt-get install -y apt-transport-https ca-certificates software-properties-common docker.io
+systemctl start docker &&  systemctl enable docker
+usermod -aG docker vagrant
+
+echo "[kube-install] Installing kubeadm"
+apt-get update && apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+touch /etc/apt/sources.list.d/kubernetes.list
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+
+apt-get update
+#apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet=1.20.0-00 kubeadm=1.20.0-00 kubectl=1.20.0-00
+sudo apt-mark hold kubelet kubeadm kubectl
+KUBEPREP
+
+
+Vagrant.configure("2") do |config|
+  config.vm.define "node01" do |node01_config|
+    node01_config.vm.box = "ubuntu/focal64"
+    node01_config.vm.hostname = "kube01"
+    node01_config.vm.network "public_network", bridge: BRIDGE_IF, ip: IP_ADDR_NODE01
+    node01_config.vm.provider "virtualbox" do |v|
+      v.linked_clone = true
+      v.memory = 4096
+    end
+    node01_config.vm.provision "shell", inline: $generic
+    node01_config.vm.provision "shell", inline: $kubePrep
+  end
+
+  config.vm.define "node02" do |node02_config|
+    node02_config.vm.box = "ubuntu/focal64"
+    node02_config.vm.hostname = "kube02"
+    node02_config.vm.network "public_network", bridge: BRIDGE_IF, ip: IP_ADDR_NODE02
+    node02_config.vm.provider "virtualbox" do |v|
+      v.linked_clone = true
+      v.memory = 4096
+    end
+    node02_config.vm.provision "shell", inline: $generic
+    node02_config.vm.provision "shell", inline: $kubePrep
+  end
+
+  config.vm.define "node03" do |node03_config|
+    node03_config.vm.box = "ubuntu/focal64"
+    node03_config.vm.hostname = "kube03"
+    node03_config.vm.network "public_network", bridge: BRIDGE_IF, ip: IP_ADDR_NODE03
+    node03_config.vm.provider "virtualbox" do |v|
+      v.linked_clone = true
+      v.memory = 4096
+    end
+    node03_config.vm.provision "shell", inline: $generic
+    node03_config.vm.provision "shell", inline: $kubePrep
+  end
+
+end

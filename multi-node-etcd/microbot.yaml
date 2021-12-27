@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microbot-service-1
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      name: http
+  selector:
+    name: microbot-app-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microbot-service-2
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    name: http
+  selector:
+    name: microbot-app-2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microbot-app-1
+  labels:
+    app: microbots
+spec:
+  selector:
+    matchLabels:
+      name: microbot-app-1
+  template:
+    metadata:
+      labels:
+        name: microbot-app-1
+    spec:
+      containers:
+        - name: microbot1
+          image: jacqueline/microbot:1.0.0
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microbot-app-2
+  labels:
+    app: microbots
+spec:
+  selector:
+    matchLabels:
+      name: microbot-app-2
+  template:
+    metadata:
+      labels:
+        name: microbot-app-2
+    spec:
+      containers:
+      - name: microbot2
+        image: jacqueline/microbot:2.0.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microbot-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /microbot1
+        backend:
+          serviceName: microbot-service-1
+          servicePort: http
+      - path: /microbot2
+        backend:
+          serviceName: microbot-service-2
+          servicePort: http
+
